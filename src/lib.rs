@@ -42,11 +42,11 @@ pub trait Transaction {
     }
 
     /// Compute the [ECDSA](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm) for the transaction
-    fn ecdsa(&self, private_key: &[u8]) -> EcdsaSig {
-        let hash = self.hash();
+    //fn ecdsa(&self, private_key: &[u8]) -> EcdsaSig {
+        //let hash = self.hash();
 
-        EcdsaSig::generate(hash, private_key, self.chain())
-    }
+        //EcdsaSig::generate(hash, private_key, self.chain())
+    //}
 
     /// Sign and encode this transaction using the given ECDSA signature.
     /// Signing is done in two steps. Example:
