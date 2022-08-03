@@ -7,7 +7,6 @@ extern crate bytes;
 extern crate hex;
 extern crate num_traits;
 extern crate rlp;
-extern crate secp256k1;
 extern crate tiny_keccak;
 
 #[cfg(test)]
@@ -16,7 +15,6 @@ extern crate ethereum_types;
 extern crate serde_json;
 
 use rlp::{Encodable, RlpStream};
-use secp256k1::{Message, Secp256k1, SecretKey};
 use serde::de::Error;
 use serde::ser::SerializeSeq;
 use serde::Deserialize;
@@ -420,20 +418,20 @@ pub struct EcdsaSig {
     pub s: Vec<u8>,
 }
 
-impl EcdsaSig {
-    pub fn generate(hash: [u8; 32], private_key: &[u8], chain_id: u64) -> EcdsaSig {
-        let s = Secp256k1::signing_only();
-        let msg = Message::from_slice(&hash).unwrap();
-        let key = SecretKey::from_slice(private_key).unwrap();
-        let (v, sig_bytes) = s.sign_ecdsa_recoverable(&msg, &key).serialize_compact();
+/*impl EcdsaSig {*/
+    //pub fn generate(hash: [u8; 32], private_key: &[u8], chain_id: u64) -> EcdsaSig {
+        //let s = Secp256k1::signing_only();
+        //let msg = Message::from_slice(&hash).unwrap();
+        //let key = SecretKey::from_slice(private_key).unwrap();
+        //let (v, sig_bytes) = s.sign_ecdsa_recoverable(&msg, &key).serialize_compact();
 
-        EcdsaSig {
-            v: v.to_i32() as u64 + chain_id * 2 + 35,
-            r: sig_bytes[0..32].to_vec(),
-            s: sig_bytes[32..64].to_vec(),
-        }
-    }
-}
+        //EcdsaSig {
+            //v: v.to_i32() as u64 + chain_id * 2 + 35,
+            //r: sig_bytes[0..32].to_vec(),
+            //s: sig_bytes[32..64].to_vec(),
+        //}
+    //}
+//}
 
 fn keccak256_hash(bytes: &[u8]) -> [u8; 32] {
     let mut hasher = Keccak::v256();
