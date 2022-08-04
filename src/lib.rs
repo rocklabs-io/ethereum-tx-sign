@@ -433,7 +433,7 @@ pub struct EcdsaSig {
     //}
 //}
 
-fn keccak256_hash(bytes: &[u8]) -> [u8; 32] {
+pub fn keccak256_hash(bytes: &[u8]) -> [u8; 32] {
     let mut hasher = Keccak::v256();
     hasher.update(bytes);
     let mut resp: [u8; 32] = Default::default();
